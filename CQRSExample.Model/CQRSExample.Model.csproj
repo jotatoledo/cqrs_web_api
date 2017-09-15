@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MaterialNumber\MaterialNumberDetails.cs" />
+    <Compile Include="MaterialNumber\MaterialNumberData.cs" />
+    <Compile Include="Plant\PlantData.cs" />
     <Compile Include="Plant\PlantDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkCenter\WorkCenterData.cs" />
     <Compile Include="WorkCenter\WorkshopDetails.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

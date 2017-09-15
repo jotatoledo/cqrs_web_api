@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CQRSExample.Model.Plant;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace CQRSExample.WebAPI.Models.Plant
 {
-    public class PlantFormModel
+    public class PlantFormModel : PlantData
     {
     }
 }
