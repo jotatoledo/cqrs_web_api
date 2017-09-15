@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Model", "CQRSEx
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{32E3E64D-85D8-49EC-9AB5-76A776FB6292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Domain.MaterialNumber", "CQRSExample.Domain.MaterialNumber\CQRSExample.Domain.MaterialNumber.csproj", "{B0707579-7476-4264-88FA-EEF0A6535FE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Domain.MaterialNumbers", "CQRSExample.Domain.MaterialNumbers\CQRSExample.Domain.MaterialNumbers.csproj", "{B0707579-7476-4264-88FA-EEF0A6535FE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
