@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.WebAPI", "CQRSExample.WebAPI\CQRSExample.WebAPI.csproj", "{00535368-0C2A-41FD-9224-17E337D5ABB3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{710D3BC8-0554-46CA-9EC9-95BBF21AB215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Data.Sql.StarterDb", "CQRSExample.Data.Sql.StarterDb\CQRSExample.Data.Sql.StarterDb.csproj", "{A77125D2-F5CB-430E-A8F6-C39D35113E50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Model", "CQRSExample.Model\CQRSExample.Model.csproj", "{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,19 @@ Global
 		{00535368-0C2A-41FD-9224-17E337D5ABB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00535368-0C2A-41FD-9224-17E337D5ABB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00535368-0C2A-41FD-9224-17E337D5ABB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A77125D2-F5CB-430E-A8F6-C39D35113E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A77125D2-F5CB-430E-A8F6-C39D35113E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A77125D2-F5CB-430E-A8F6-C39D35113E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A77125D2-F5CB-430E-A8F6-C39D35113E50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A77125D2-F5CB-430E-A8F6-C39D35113E50} = {710D3BC8-0554-46CA-9EC9-95BBF21AB215}
 	EndGlobalSection
 EndGlobal

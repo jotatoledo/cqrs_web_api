@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StarterDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MaterialNumber">
+          <Key>
+            <PropertyRef Name="Poid" />
+          </Key>
+          <Property Name="Poid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaxQuantity" Type="int" Nullable="false" />
+          <Property Name="MinQuantity" Type="int" Nullable="false" />
+          <Property Name="Renner" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plant">
+          <Key>
+            <PropertyRef Name="Poid" />
+          </Key>
+          <Property Name="Poid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SAPId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SAPWarehouse" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkCenter">
+          <Key>
+            <PropertyRef Name="Poid" />
+          </Key>
+          <Property Name="Poid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlantPoid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkCenterToMaterialNumberMap">
+          <Key>
+            <PropertyRef Name="WorkCenterPoid" />
+            <PropertyRef Name="MaterialNumberPoid" />
+          </Key>
+          <Property Name="WorkCenterPoid" Type="int" Nullable="false" />
+          <Property Name="MaterialNumberPoid" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_WorkCenter_Plant">
+          <End Role="Plant" Type="Self.Plant" Multiplicity="1" />
+          <End Role="WorkCenter" Type="Self.WorkCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plant">
+              <PropertyRef Name="Poid" />
+            </Principal>
+            <Dependent Role="WorkCenter">
+              <PropertyRef Name="PlantPoid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkCenterToMaterialNumberMap_MaterialNumber">
+          <End Role="MaterialNumber" Type="Self.MaterialNumber" Multiplicity="1" />
+          <End Role="WorkCenterToMaterialNumberMap" Type="Self.WorkCenterToMaterialNumberMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialNumber">
+              <PropertyRef Name="Poid" />
+            </Principal>
+            <Dependent Role="WorkCenterToMaterialNumberMap">
+              <PropertyRef Name="MaterialNumberPoid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkCenterToMaterialNumberMap_WorkCenter">
+          <End Role="WorkCenter" Type="Self.WorkCenter" Multiplicity="1" />
+          <End Role="WorkCenterToMaterialNumberMap" Type="Self.WorkCenterToMaterialNumberMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkCenter">
+              <PropertyRef Name="Poid" />
+            </Principal>
+            <Dependent Role="WorkCenterToMaterialNumberMap">
+              <PropertyRef Name="WorkCenterPoid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StarterDbModelStoreContainer">
+          <EntitySet Name="MaterialNumber" EntityType="Self.MaterialNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plant" EntityType="Self.Plant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkCenter" EntityType="Self.WorkCenter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkCenterToMaterialNumberMap" EntityType="Self.WorkCenterToMaterialNumberMap" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_WorkCenter_Plant" Association="Self.FK_WorkCenter_Plant">
+            <End Role="Plant" EntitySet="Plant" />
+            <End Role="WorkCenter" EntitySet="WorkCenter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkCenterToMaterialNumberMap_MaterialNumber" Association="Self.FK_WorkCenterToMaterialNumberMap_MaterialNumber">
+            <End Role="MaterialNumber" EntitySet="MaterialNumber" />
+            <End Role="WorkCenterToMaterialNumberMap" EntitySet="WorkCenterToMaterialNumberMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkCenterToMaterialNumberMap_WorkCenter" Association="Self.FK_WorkCenterToMaterialNumberMap_WorkCenter">
+            <End Role="WorkCenter" EntitySet="WorkCenter" />
+            <End Role="WorkCenterToMaterialNumberMap" EntitySet="WorkCenterToMaterialNumberMap" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StarterDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MaterialNumber">
+          <Key>
+            <PropertyRef Name="Poid" />
+          </Key>
+          <Property Name="Poid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaxQuantity" Type="Int32" Nullable="false" />
+          <Property Name="MinQuantity" Type="Int32" Nullable="false" />
+          <Property Name="Renner" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="WorkCenter" Relationship="Self.WorkCenterToMaterialNumberMap" FromRole="MaterialNumber" ToRole="WorkCenter" />
+        </EntityType>
+        <EntityType Name="Plant">
+          <Key>
+            <PropertyRef Name="Poid" />
+          </Key>
+          <Property Name="Poid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SAPId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SAPWarehouse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="WorkCenter" Relationship="Self.FK_WorkCenter_Plant" FromRole="Plant" ToRole="WorkCenter" />
+        </EntityType>
+        <EntityType Name="WorkCenter">
+          <Key>
+            <PropertyRef Name="Poid" />
+          </Key>
+          <Property Name="Poid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlantPoid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plant" Relationship="Self.FK_WorkCenter_Plant" FromRole="WorkCenter" ToRole="Plant" />
+          <NavigationProperty Name="MaterialNumber" Relationship="Self.WorkCenterToMaterialNumberMap" FromRole="WorkCenter" ToRole="MaterialNumber" />
+        </EntityType>
+        <Association Name="FK_WorkCenter_Plant">
+          <End Role="Plant" Type="Self.Plant" Multiplicity="1" />
+          <End Role="WorkCenter" Type="Self.WorkCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plant">
+              <PropertyRef Name="Poid" />
+            </Principal>
+            <Dependent Role="WorkCenter">
+              <PropertyRef Name="PlantPoid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WorkCenterToMaterialNumberMap">
+          <End Role="MaterialNumber" Type="Self.MaterialNumber" Multiplicity="*" />
+          <End Role="WorkCenter" Type="Self.WorkCenter" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="StarterDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MaterialNumber" EntityType="Self.MaterialNumber" />
+          <EntitySet Name="Plant" EntityType="Self.Plant" />
+          <EntitySet Name="WorkCenter" EntityType="Self.WorkCenter" />
+          <AssociationSet Name="FK_WorkCenter_Plant" Association="Self.FK_WorkCenter_Plant">
+            <End Role="Plant" EntitySet="Plant" />
+            <End Role="WorkCenter" EntitySet="WorkCenter" />
+          </AssociationSet>
+          <AssociationSet Name="WorkCenterToMaterialNumberMap" Association="Self.WorkCenterToMaterialNumberMap">
+            <End Role="MaterialNumber" EntitySet="MaterialNumber" />
+            <End Role="WorkCenter" EntitySet="WorkCenter" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StarterDbModelStoreContainer" CdmEntityContainer="StarterDbEntities">
+          <EntitySetMapping Name="MaterialNumber">
+            <EntityTypeMapping TypeName="StarterDbModel.MaterialNumber">
+              <MappingFragment StoreEntitySet="MaterialNumber">
+                <ScalarProperty Name="Poid" ColumnName="Poid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaxQuantity" ColumnName="MaxQuantity" />
+                <ScalarProperty Name="MinQuantity" ColumnName="MinQuantity" />
+                <ScalarProperty Name="Renner" ColumnName="Renner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plant">
+            <EntityTypeMapping TypeName="StarterDbModel.Plant">
+              <MappingFragment StoreEntitySet="Plant">
+                <ScalarProperty Name="Poid" ColumnName="Poid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SAPId" ColumnName="SAPId" />
+                <ScalarProperty Name="SAPWarehouse" ColumnName="SAPWarehouse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkCenter">
+            <EntityTypeMapping TypeName="StarterDbModel.WorkCenter">
+              <MappingFragment StoreEntitySet="WorkCenter">
+                <ScalarProperty Name="Poid" ColumnName="Poid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PlantPoid" ColumnName="PlantPoid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="WorkCenterToMaterialNumberMap" TypeName="StarterDbModel.WorkCenterToMaterialNumberMap" StoreEntitySet="WorkCenterToMaterialNumberMap">
+            <EndProperty Name="MaterialNumber">
+              <ScalarProperty Name="Poid" ColumnName="MaterialNumberPoid" />
+            </EndProperty>
+            <EndProperty Name="WorkCenter">
+              <ScalarProperty Name="Poid" ColumnName="WorkCenterPoid" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
