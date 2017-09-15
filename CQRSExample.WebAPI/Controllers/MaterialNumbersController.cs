@@ -6,12 +6,17 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MediatR;
 
 namespace CQRSExample.WebAPI.Controllers
 {
     [RoutePrefix("material-numbers")]
     public class MaterialNumbersController : BaseWebApiController
     {
+        public MaterialNumbersController(IMediator mediator) : base(mediator)
+        {
+        }
+
         [HttpGet]
         [Route("")]
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(IEnumerable<MaterialNumberDetails>), Description = "Query completed")]

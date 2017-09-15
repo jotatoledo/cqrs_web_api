@@ -1,15 +1,13 @@
-﻿using CQRSExample.Data.SQL.StarterDb;
-using CQRSExample.DTO.MaterialNumber;
-using CQRSExample.DTO.Plant;
-using CQRSExample.DTO.WorkCenter;
+﻿using CQRSExample.Model.MaterialNumber;
 using CQRSExample.Model.Plant;
 using CQRSExample.Model.WorkCenter;
-using CQRSExample.WebAPI.Models;
+using CQRSExample.WebAPI.Models.MaterialNumber;
 using CQRSExample.WebAPI.Models.Plant;
+using CQRSExample.WebAPI.Models.WorkCenter;
+using MediatR;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -19,6 +17,10 @@ namespace CQRSExample.WebAPI.Controllers
     [RoutePrefix("plants")]
     public class PlantsController : BaseWebApiController
     {
+        public PlantsController(IMediator mediator) : base(mediator)
+        {
+        }
+
         [Route("")]
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(IEnumerable<PlantDetails>), Description = "Query completed")]
@@ -133,11 +135,21 @@ namespace CQRSExample.WebAPI.Controllers
 
         [HttpPost]
         [Route("{plantId}/work-centers/{workCenterId}/material-numbers")]
-        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(MaterialNumberDetails), Description = "Entry created")]
+        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(WorkCenterDetails), Description = "Association created")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Wrong format/content of request body")]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        public IHttpActionResult AssociateMaterialNumberToWorkCenter(string plantId, string workCenterId, [FromBody]string[] materialNumbers)
+        {
+            // TODO null string[]?
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete]
+        [Route("{plantId}/work-centers/{workCenterId}/material-numbers/{materialNumberId}")]
+        [SwaggerResponse(HttpStatusCode.NoContent, Description = "Dissociated")]
         [SwaggerResponse(HttpStatusCode.NotFound, Description = "No matching entry for the given Id")]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public IHttpActionResult CreateMaterialNumber(string plantId, string workCenterId, [FromBody]MaterialNumberFormModel model)
+        public HttpRequestMessage DissociateMaterialNumberFromWorkCenter(string plantId, string workCenterId, string materialNumberId)
         {
             throw new NotImplementedException();
         }
