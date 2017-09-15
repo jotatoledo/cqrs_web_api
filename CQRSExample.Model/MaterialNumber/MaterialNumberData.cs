@@ -8,5 +8,6 @@ namespace CQRSExample.Model.MaterialNumber
 {
     public interface MaterialNumberData
     {
+        string Id { get; set; }
     }
 }

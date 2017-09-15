@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MediatR;
+using System.Threading.Tasks;
 
 namespace CQRSExample.WebAPI.Controllers
 {
@@ -31,9 +32,18 @@ namespace CQRSExample.WebAPI.Controllers
         [SwaggerResponse(HttpStatusCode.Created, Type = typeof(MaterialNumberDetails), Description = "Entry created")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Wrong format/content of request body")]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public IHttpActionResult Create([FromBody]MaterialNumberFormModel model)
+        public async Task<IHttpActionResult> Create([FromBody]MaterialNumberFormModel model)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            await _mediator.Send(new Domain.MaterialNumbers.Create.Command
+            {
+                Model = model
+            });
+            var result = await _mediator.Send(new Domain.MaterialNumbers.Get.Query
+            {
+                Id = model.Id
+            });
+            return Created(new Uri(Request.RequestUri, model.Id), result);
         }
 
         [HttpDelete]
