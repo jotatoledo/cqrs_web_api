@@ -296,6 +296,10 @@
       <Project>{A77125D2-F5CB-430E-A8F6-C39D35113E50}</Project>
       <Name>CQRSExample.Data.Sql.StarterDb</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CQRSExample.Domain.MaterialNumbers\CQRSExample.Domain.MaterialNumbers.csproj">
+      <Project>{b0707579-7476-4264-88fa-eef0a6535fe0}</Project>
+      <Name>CQRSExample.Domain.MaterialNumbers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CQRSExample.Model\CQRSExample.Model.csproj">
       <Project>{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}</Project>
       <Name>CQRSExample.Model</Name>

@@ -1,20 +1,20 @@
 ﻿using CQRSExample.Data.Sql.StarterDb;
-using CQRSExample.Model.MaterialNumber;
 using MediatR;
 using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace CQRSExample.Domain.MaterialNumbers
 {
-    public class Create
+    public class Delete
     {
         public class Command : IRequest
         {
-            public MaterialNumberData Model { get; set; }
+            public string Id { get; set; }
 
-            public Command(MaterialNumberData model)
+            public Command(string id)
             {
-                Model = model;
+                Id = id;
             }
         }
 
@@ -30,9 +30,9 @@ namespace CQRSExample.Domain.MaterialNumbers
 
             public async Task Handle(Command message)
             {
-                var materialNumber = new MaterialNumber();
-                _context.MaterialNumber.Add(materialNumber);
-                _context.Entry(materialNumber).CurrentValues.SetValues(message.Model);
+                var materialNumber = await _context.MaterialNumber.SingleOrDefaultAsync(mn => mn.Id == message.Id);
+                if (materialNumber == null) throw new InvalidOperationException();
+                _context.MaterialNumber.Remove(materialNumber);
                 await _context.SaveChangesAsync();
             }
         }

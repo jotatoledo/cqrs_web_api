@@ -3,14 +3,12 @@ using CQRSExample.Data.Sql.StarterDb;
 using CQRSExample.Model.MaterialNumber;
 using MediatR;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CQRSExample.Domain.MaterialNumbers
 {
-    public class Get
+    public class Details
     {
         public class Query : IRequest<MaterialNumberDetails>
         {
