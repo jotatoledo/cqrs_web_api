@@ -35,14 +35,8 @@ namespace CQRSExample.WebAPI.Controllers
         public async Task<IHttpActionResult> Create([FromBody]MaterialNumberFormModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            await _mediator.Send(new Domain.MaterialNumbers.Create.Command
-            {
-                Model = model
-            });
-            var result = await _mediator.Send(new Domain.MaterialNumbers.Get.Query
-            {
-                Id = model.Id
-            });
+            await _mediator.Send(new Domain.MaterialNumbers.Create.Command(model));
+            var result = await _mediator.Send(new Domain.MaterialNumbers.Get.Query(model.Id));
             return Created(new Uri(Request.RequestUri, model.Id), result);
         }
 

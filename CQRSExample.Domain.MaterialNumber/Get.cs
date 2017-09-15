@@ -15,6 +15,11 @@ namespace CQRSExample.Domain.MaterialNumbers
         public class Query : IRequest<MaterialNumberDetails>
         {
             public string Id { get; set; }
+
+            public Query(string id)
+            {
+                Id = id;
+            }
         }
 
         public class QueryHandler : IAsyncRequestHandler<Query, MaterialNumberDetails>

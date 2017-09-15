@@ -14,6 +14,11 @@ namespace CQRSExample.Domain.MaterialNumbers
         public class Command : IRequest
         {
             public MaterialNumberData Model { get; set; }
+
+            public Command(MaterialNumberData model)
+            {
+                Model = model;
+            }
         }
 
         public class CommandHandler : IAsyncRequestHandler<Command>
