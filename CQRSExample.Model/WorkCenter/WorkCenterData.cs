@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CQRSExample.Model.WorkCenter
+﻿namespace CQRSExample.Model.WorkCenter
 {
     public interface WorkCenterData
     {
+        string Id { get; set; }
+        string Name { get; set; }
     }
 }
