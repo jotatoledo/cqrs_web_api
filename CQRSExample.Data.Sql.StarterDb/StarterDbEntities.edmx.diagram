@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="75c32d3ab6ed4b5eae5ae395879d9ee5" Name="Diagram1">
+      <Diagram DiagramId="75c32d3ab6ed4b5eae5ae395879d9ee5" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="StarterDbModel.MaterialNumber" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StarterDbModel.Plant" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StarterDbModel.Plant" Width="1.5" PointX="6.625" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="StarterDbModel.WorkCenter" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="StarterDbModel.FK_WorkCenter_Plant" ManuallyRouted="false" />
         <AssociationConnector Association="StarterDbModel.WorkCenterToMaterialNumberMap" ManuallyRouted="false" />

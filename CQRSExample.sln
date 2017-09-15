@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Data.Sql.Starte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Model", "CQRSExample.Model\CQRSExample.Model.csproj", "{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{32E3E64D-85D8-49EC-9AB5-76A776FB6292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSExample.Domain.MaterialNumber", "CQRSExample.Domain.MaterialNumber\CQRSExample.Domain.MaterialNumber.csproj", "{B0707579-7476-4264-88FA-EEF0A6535FE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +33,16 @@ Global
 		{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7D46129-FEFE-4311-84DC-0246AFAF1D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0707579-7476-4264-88FA-EEF0A6535FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0707579-7476-4264-88FA-EEF0A6535FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0707579-7476-4264-88FA-EEF0A6535FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0707579-7476-4264-88FA-EEF0A6535FE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A77125D2-F5CB-430E-A8F6-C39D35113E50} = {710D3BC8-0554-46CA-9EC9-95BBF21AB215}
+		{B0707579-7476-4264-88FA-EEF0A6535FE0} = {32E3E64D-85D8-49EC-9AB5-76A776FB6292}
 	EndGlobalSection
 EndGlobal
