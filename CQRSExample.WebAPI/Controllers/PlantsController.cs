@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CQRSExample.WebAPI.Controllers
@@ -25,9 +26,10 @@ namespace CQRSExample.WebAPI.Controllers
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(IEnumerable<PlantDetails>), Description = "Query completed")]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public IHttpActionResult QueryPlants()
+        public async Task<IHttpActionResult> QueryPlants()
         {
-            throw new NotImplementedException();
+            var result = await _mediator.Send(new Domain.Plants.List.Query());
+            return Ok(result);
         }
 
         [Route("")]
@@ -35,9 +37,12 @@ namespace CQRSExample.WebAPI.Controllers
         [SwaggerResponse(HttpStatusCode.Created, Type = typeof(PlantDetails), Description = "New entry created")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Wrong format/content of request body")]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public IHttpActionResult Create([FromBody]PlantFormModel model)
+        public async Task<IHttpActionResult> Create([FromBody]PlantFormModel model)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            await _mediator.Send(new Domain.Plants.Create.Command(model));
+            var result = await _mediator.Send(new Domain.Plants.Details.Query(model.Id));
+            return Created(new Uri(Request.RequestUri, model.Id), result);
         }
 
         [HttpGet]
@@ -45,9 +50,10 @@ namespace CQRSExample.WebAPI.Controllers
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(PlantDetails), Description = "Entry found")]
         [SwaggerResponse(HttpStatusCode.NotFound, Description = "No matching entry for the given Id")]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public IHttpActionResult GetPlant(string id)
+        public async Task<IHttpActionResult> GetPlant(string id)
         {
-            throw new NotImplementedException();
+            var result = await _mediator.Send(new Domain.Plants.Details.Query(id));
+            return Ok(result);
         }
 
         [HttpDelete]
@@ -55,9 +61,10 @@ namespace CQRSExample.WebAPI.Controllers
         [SwaggerResponse(HttpStatusCode.NoContent, Description = "Entry deleted")]
         [SwaggerResponse(HttpStatusCode.NotFound, Description = "No matching entry for the given Id")]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public HttpResponseMessage Delete(string id)
+        public async Task<HttpResponseMessage> Delete(string id)
         {
-            throw new NotImplementedException();
+            await _mediator.Send(new Domain.Plants.Delete.Command(id));
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpPut]
@@ -66,9 +73,12 @@ namespace CQRSExample.WebAPI.Controllers
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Wrong format/content of request body")]
         [SwaggerResponse(HttpStatusCode.NotFound, Description = "No matching entry for the given Id")]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
-        public IHttpActionResult UpdatePlant(string id, [FromBody]PlantFormModel model)
+        public async Task<IHttpActionResult> UpdatePlant(string id, [FromBody]PlantFormModel model)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            await _mediator.Send(new Domain.Plants.Update.Command(id, model));
+            var result = await _mediator.Send(new Domain.Plants.Details.Query(model.Id));
+            return Ok(result);
         }
 
         [HttpGet]
