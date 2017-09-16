@@ -83,14 +83,10 @@ namespace CQRSExample.WebAPI.App_Start
         {
             var container = new UnityContainer();
             return RegisterTypes(container)
-            .RegisterMediator(new HierarchicalLifetimeManager());
-            //.RegisterMediatorHandlers(Assembly.Load("Warehouse.Domain.Plants"))
-            //.RegisterMediatorHandlers(Assembly.Load("Warehouse.Domain.Workshops"))
-            //.RegisterMediatorHandlers(Assembly.Load("Warehouse.Domain.MaterialNumbers"))
-            //.RegisterMediatorHandlers(Assembly.Load("Warehouse.Domain.StorageTypes"))
-            //.RegisterMediatorHandlers(Assembly.Load("Warehouse.Domain.SAPMachines"))
-            //.RegisterMediatorHandlers(Assembly.Load("Warehouse.Domain.Supermarket"))
-            //.RegisterMediatorHandlers(Assembly.Load("Warehouse.Domain.StorageCodes"));
+            .RegisterMediator(new HierarchicalLifetimeManager())
+            .RegisterMediatorHandlers(Assembly.Load("CQRSExample.Domain.Plants"))
+            .RegisterMediatorHandlers(Assembly.Load("CQRSExample.Domain.Workcenters"))
+            .RegisterMediatorHandlers(Assembly.Load("CQRSExample.Domain.MaterialNumbers"));
         });
 
         /// <summary>
