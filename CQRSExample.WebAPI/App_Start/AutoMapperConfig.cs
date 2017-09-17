@@ -16,10 +16,13 @@ namespace CQRSExample.WebAPI.App_Start
 
         private static MapperConfiguration RegisterMappings()
         {
-            var config = new MapperConfiguration(cfg =>
+            return new MapperConfiguration(cfg =>
             {
             });
-            config.AssertConfigurationIsValid();
+        }
+
+        public static void RegisterStaticConfig()
+        {
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Plant, PlantDetails>();
@@ -27,7 +30,6 @@ namespace CQRSExample.WebAPI.App_Start
                 cfg.CreateMap<MaterialNumber, MaterialNumberDetails>();
             });
             Mapper.AssertConfigurationIsValid();
-            return config;
         }
 
         /// <summary>
