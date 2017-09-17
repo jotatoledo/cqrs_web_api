@@ -1,8 +1,8 @@
-using System;
-using System.Web.Http;
-using System.Web.Mvc;
 using CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions;
 using CQRSExample.WebAPI.Areas.HelpPage.Models;
+using Microsoft.Practices.Unity;
+using System.Web.Http;
+using System.Web.Mvc;
 
 namespace CQRSExample.WebAPI.Areas.HelpPage.Controllers
 {
@@ -13,6 +13,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.Controllers
     {
         private const string ErrorViewName = "Error";
 
+        [InjectionConstructor]
         public HelpController()
             : this(GlobalConfiguration.Configuration)
         {
@@ -33,7 +34,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.Controllers
 
         public ActionResult Api(string apiId)
         {
-            if (!String.IsNullOrEmpty(apiId))
+            if (!string.IsNullOrEmpty(apiId))
             {
                 HelpPageApiModel apiModel = Configuration.GetHelpPageApiModel(apiId);
                 if (apiModel != null)
@@ -47,7 +48,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.Controllers
 
         public ActionResult ResourceModel(string modelName)
         {
-            if (!String.IsNullOrEmpty(modelName))
+            if (!string.IsNullOrEmpty(modelName))
             {
                 ModelDescriptionGenerator modelDescriptionGenerator = Configuration.GetModelDescriptionGenerator();
                 ModelDescription modelDescription;

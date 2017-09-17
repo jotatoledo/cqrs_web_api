@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,6 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
 using System.Xml.Linq;
-using Newtonsoft.Json;
 
 namespace CQRSExample.WebAPI.Areas.HelpPage
 {
@@ -166,7 +166,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
         }
 
         /// <summary>
-        /// Gets the sample object that will be serialized by the formatters. 
+        /// Gets the sample object that will be serialized by the formatters.
         /// First, it will look at the <see cref="SampleObjects"/>. If no sample object is found, it will try to create
         /// one using <see cref="DefaultSampleObjectFactory"/> (which wraps an <see cref="ObjectGenerator"/>) and other
         /// factories in <see cref="SampleObjectFactories"/>.
@@ -265,6 +265,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
                         type = requestBodyParameter == null ? null : requestBodyParameter.ParameterDescriptor.ParameterType;
                         formatters = api.SupportedRequestBodyFormatters;
                         break;
+
                     case SampleDirection.Response:
                     default:
                         type = api.ResponseDescription.ResponseType ?? api.ResponseDescription.DeclaredType;
@@ -296,7 +297,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
                 throw new ArgumentNullException("mediaType");
             }
 
-            object sample = String.Empty;
+            object sample = string.Empty;
             MemoryStream ms = null;
             HttpContent content = null;
             try
@@ -322,7 +323,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
                 }
                 else
                 {
-                    sample = new InvalidSample(String.Format(
+                    sample = new InvalidSample(string.Format(
                         CultureInfo.CurrentCulture,
                         "Failed to generate the sample for media type '{0}'. Cannot use formatter '{1}' to write type '{2}'.",
                         mediaType,
@@ -332,7 +333,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
             }
             catch (Exception e)
             {
-                sample = new InvalidSample(String.Format(
+                sample = new InvalidSample(string.Format(
                     CultureInfo.CurrentCulture,
                     "An exception has occurred while using the formatter '{0}' to generate sample for media type '{1}'. Exception message: {2}",
                     formatter.GetType().Name,
@@ -408,6 +409,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
             {
                 case SampleDirection.Request:
                     return formatter.CanReadType(type);
+
                 case SampleDirection.Response:
                     return formatter.CanWriteType(type);
             }
@@ -420,8 +422,8 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
             foreach (var sample in ActionSamples)
             {
                 HelpPageSampleKey sampleKey = sample.Key;
-                if (String.Equals(controllerName, sampleKey.ControllerName, StringComparison.OrdinalIgnoreCase) &&
-                    String.Equals(actionName, sampleKey.ActionName, StringComparison.OrdinalIgnoreCase) &&
+                if (string.Equals(controllerName, sampleKey.ControllerName, StringComparison.OrdinalIgnoreCase) &&
+                    string.Equals(actionName, sampleKey.ActionName, StringComparison.OrdinalIgnoreCase) &&
                     (sampleKey.ParameterNames.SetEquals(new[] { "*" }) || parameterNamesSet.SetEquals(sampleKey.ParameterNames)) &&
                     sampleDirection == sampleKey.SampleDirection)
                 {

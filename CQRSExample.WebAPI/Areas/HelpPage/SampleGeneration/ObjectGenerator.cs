@@ -418,13 +418,13 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
                     { typeof(Object), index => new object() },
                     { typeof(SByte), index => (SByte)64 },
                     { typeof(Single), index => (Single)(index + 0.1) },
-                    { 
-                        typeof(String), index =>
+                    {
+                        typeof(string), index =>
                         {
-                            return String.Format(CultureInfo.CurrentCulture, "sample string {0}", index);
+                            return string.Format(CultureInfo.CurrentCulture, "sample string {0}", index);
                         }
                     },
-                    { 
+                    {
                         typeof(TimeSpan), index =>
                         {
                             return TimeSpan.FromTicks(1234567);
@@ -433,10 +433,10 @@ namespace CQRSExample.WebAPI.Areas.HelpPage
                     { typeof(UInt16), index => (UInt16)(index % UInt16.MaxValue) },
                     { typeof(UInt32), index => (UInt32)(index % UInt32.MaxValue) },
                     { typeof(UInt64), index => (UInt64)index },
-                    { 
+                    {
                         typeof(Uri), index =>
                         {
-                            return new Uri(String.Format(CultureInfo.CurrentCulture, "http://webapihelppage{0}.com", index));
+                            return new Uri(string.Format(CultureInfo.CurrentCulture, "http://webapihelppage{0}.com", index));
                         }
                     },
                 };
