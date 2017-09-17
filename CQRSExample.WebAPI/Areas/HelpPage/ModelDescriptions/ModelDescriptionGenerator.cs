@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.Runtime.Serialization;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
 
 namespace CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions
 {
@@ -25,37 +25,37 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions
             { typeof(RangeAttribute), a =>
                 {
                     RangeAttribute range = (RangeAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Range: inclusive between {0} and {1}", range.Minimum, range.Maximum);
+                    return string.Format(CultureInfo.CurrentCulture, "Range: inclusive between {0} and {1}", range.Minimum, range.Maximum);
                 }
             },
             { typeof(MaxLengthAttribute), a =>
                 {
                     MaxLengthAttribute maxLength = (MaxLengthAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Max length: {0}", maxLength.Length);
+                    return string.Format(CultureInfo.CurrentCulture, "Max length: {0}", maxLength.Length);
                 }
             },
             { typeof(MinLengthAttribute), a =>
                 {
                     MinLengthAttribute minLength = (MinLengthAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Min length: {0}", minLength.Length);
+                    return string.Format(CultureInfo.CurrentCulture, "Min length: {0}", minLength.Length);
                 }
             },
             { typeof(StringLengthAttribute), a =>
                 {
                     StringLengthAttribute strLength = (StringLengthAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "String length: inclusive between {0} and {1}", strLength.MinimumLength, strLength.MaximumLength);
+                    return string.Format(CultureInfo.CurrentCulture, "String length: inclusive between {0} and {1}", strLength.MinimumLength, strLength.MaximumLength);
                 }
             },
             { typeof(DataTypeAttribute), a =>
                 {
                     DataTypeAttribute dataType = (DataTypeAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Data type: {0}", dataType.CustomDataType ?? dataType.DataType.ToString());
+                    return string.Format(CultureInfo.CurrentCulture, "Data type: {0}", dataType.CustomDataType ?? dataType.DataType.ToString());
                 }
             },
             { typeof(RegularExpressionAttribute), a =>
                 {
                     RegularExpressionAttribute regularExpression = (RegularExpressionAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Matching regular expression pattern: {0}", regularExpression.Pattern);
+                    return string.Format(CultureInfo.CurrentCulture, "Matching regular expression pattern: {0}", regularExpression.Pattern);
                 }
             },
         };
@@ -76,7 +76,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions
             { typeof(Single), "decimal number" },
             { typeof(Double), "decimal number" },
             { typeof(Decimal), "decimal number" },
-            { typeof(String), "string" },
+            { typeof(string), "string" },
             { typeof(Guid), "globally unique identifier" },
             { typeof(TimeSpan), "time interval" },
             { typeof(DateTime), "date" },
@@ -127,7 +127,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions
                 if (modelType != modelDescription.ModelType)
                 {
                     throw new InvalidOperationException(
-                        String.Format(
+                        string.Format(
                             CultureInfo.CurrentCulture,
                             "A model description could not be created. Duplicate model name '{0}' was found for types '{1}' and '{2}'. " +
                             "Use the [ModelName] attribute to change the model name for at least one of the types so that it has a unique name.",
@@ -205,7 +205,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions
         private static string GetMemberName(MemberInfo member, bool hasDataContractAttribute)
         {
             JsonPropertyAttribute jsonProperty = member.GetCustomAttribute<JsonPropertyAttribute>();
-            if (jsonProperty != null && !String.IsNullOrEmpty(jsonProperty.PropertyName))
+            if (jsonProperty != null && !string.IsNullOrEmpty(jsonProperty.PropertyName))
             {
                 return jsonProperty.PropertyName;
             }
@@ -213,7 +213,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions
             if (hasDataContractAttribute)
             {
                 DataMemberAttribute dataMember = member.GetCustomAttribute<DataMemberAttribute>();
-                if (dataMember != null && !String.IsNullOrEmpty(dataMember.Name))
+                if (dataMember != null && !string.IsNullOrEmpty(dataMember.Name))
                 {
                     return dataMember.Name;
                 }
@@ -297,7 +297,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions
                 }
 
                 // Sort the rest based on alphabetic order of the documentation
-                return String.Compare(x.Documentation, y.Documentation, StringComparison.OrdinalIgnoreCase);
+                return string.Compare(x.Documentation, y.Documentation, StringComparison.OrdinalIgnoreCase);
             });
 
             foreach (ParameterAnnotation annotation in annotations)
