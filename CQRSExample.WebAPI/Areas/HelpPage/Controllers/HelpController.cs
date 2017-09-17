@@ -1,5 +1,6 @@
 using CQRSExample.WebAPI.Areas.HelpPage.ModelDescriptions;
 using CQRSExample.WebAPI.Areas.HelpPage.Models;
+using Microsoft.Practices.Unity;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -12,6 +13,7 @@ namespace CQRSExample.WebAPI.Areas.HelpPage.Controllers
     {
         private const string ErrorViewName = "Error";
 
+        [InjectionConstructor]
         public HelpController()
             : this(GlobalConfiguration.Configuration)
         {
